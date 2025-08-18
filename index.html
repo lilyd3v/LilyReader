@@ -15,11 +15,12 @@
     <script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore-compat.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GP8PTD3TLS"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-GP8PTD3TLS');
     </script>
@@ -234,6 +235,10 @@
             document.getElementById('input-series-title').value = '';
             document.getElementById('input-series-cover').value = '';
 
+            document.getElementById('cover-placeholder').classList.remove('collapse');
+            document.getElementById('cover-preview').classList.add('collapse');
+            document.getElementById('cover-preview').src = '';
+
             const newSeriesModal = document.getElementById('newSeriesModal');
             let modal = bootstrap.Modal.getInstance(newSeriesModal);
             if (!modal) {
@@ -252,6 +257,7 @@
 
             showSpinner();
             var title = document.getElementById('input-series-title').value;
+            title = DOMPurify.sanitize(title);
             var cover = document.getElementById('input-series-cover').value;
 
             var newEpisodes = [];
@@ -464,4 +470,3 @@
 
 
 </html>
-
