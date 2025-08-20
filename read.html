@@ -250,7 +250,7 @@
                 series = convertSeries(data);
 
                 var filteredEpisodes = series.episodes.filter(ep => ep.id > 0);
-                
+
                 if (urlParams.has('episode')) {
                     episodeId = Number.parseInt(urlParams.get('episode'));
                 } else {
@@ -297,7 +297,7 @@
                         });
                     }
 
-                    
+
                     for (let btn of document.getElementsByClassName('prev-episode')) {
                         const episodeIndex = filteredEpisodes.findIndex(ep => ep.id === episodeId);
 
@@ -354,10 +354,12 @@
             document.getElementById('input-line-height').innerText = lineHeight;
             document.getElementById('input-paragraph-margin').innerText = paragraphMargin;
 
-            document.getElementById('episode-content').style.fontSize = fontSize + 'rem';
-            document.getElementById('episode-content').style.lineHeight = lineHeight + 'rem';
-            document.getElementById('episode-content').style.marginTop = paragraphMargin + 'rem';
-            document.getElementById('episode-content').style.marginBottom = paragraphMargin + 'rem';
+            document.getElementById('episode-content').querySelectorAll('p').forEach(p => {
+                p.style.fontSize = fontSize + 'rem';
+                p.style.lineHeight = lineHeight + 'rem';
+                p.style.marginTop = paragraphMargin + 'rem';
+                p.style.marginBottom = paragraphMargin + 'rem';
+            });
         }
 
         function changeFontSize(delta) {
