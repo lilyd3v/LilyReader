@@ -100,7 +100,10 @@
         #input-font-size,
         #input-line-height,
         #input-paragraph-margin {
-            width: 2.5rem;
+            width: 2rem;
+            font-size: 0.8rem;
+            padding-left: 0;
+            padding-right: 0;
         }
     </style>
 </head>
@@ -140,7 +143,8 @@
         <div id="content-container">
             <div class="row justify-content-between py-3 border-bottom">
                 <div class="col-auto">
-                    <button class="btn btn-sm btn-outline-light rounded-pill px-3 prev-episode"><i class="bi bi-caret-left-fill"></i>
+                    <button class="btn btn-sm btn-outline-light rounded-pill px-3 prev-episode"><i
+                            class="bi bi-caret-left-fill"></i>
                         이전화</button>
                 </div>
                 <div class="col-auto text-end">
@@ -154,32 +158,35 @@
                     <span class="badge bg-secondary">글쓴이</span> <span id="episode-writer" class="badge me-4"></span>
                     <span class="badge bg-secondary">작성일</span> <span id="episode-date" class="badge"></span>
                 </div>
-                <div id="toolbar-top" class="d-flex gap-3 gap-md-5 py-2 mb-3 justify-content-center">
+                <div id="toolbar-top" class="d-flex gap-0 gap-md-5 py-2 mb-3 justify-content-center">
                     <div class="d-flex align-items-center">
-                        <img src="./icons/font-size.svg" class="icon me-2">
+                        <img src="./icons/font-size.svg" class="icon me-1">
                         <div class="input-group input-group-sm">
                             <button type="button" class="btn btn-outline-secondary"
                                 onclick="changeFontSize(-0.1)">-</button>
                             <span id="input-font-size" class="form-control text-center"></span>
-                            <button type="button" class="btn btn-outline-secondary" onclick="changeFontSize(0.1)">+</button>
+                            <button type="button" class="btn btn-outline-secondary"
+                                onclick="changeFontSize(0.1)">+</button>
                         </div>
                     </div>
                     <div class="d-flex align-items-center">
-                        <img src="./icons/line-height.svg" class="icon me-2">
+                        <img src="./icons/line-height.svg" class="icon ms-2 me-1">
                         <div class="input-group input-group-sm">
                             <button type="button" class="btn btn-outline-secondary"
                                 onclick="changeLineHeight(-0.1)">-</button>
                             <span id="input-line-height" class="form-control text-center"></span>
-                            <button type="button" class="btn btn-outline-secondary" onclick="changeLineHeight(0.1)">+</button>
+                            <button type="button" class="btn btn-outline-secondary"
+                                onclick="changeLineHeight(0.1)">+</button>
                         </div>
                     </div>
                     <div class="d-flex align-items-center">
-                        <img src="./icons/p-margin.svg" class="icon me-2">
+                        <img src="./icons/p-margin.svg" class="icon ms-2 me-1">
                         <div class="input-group input-group-sm">
                             <button type="button" class="btn btn-outline-secondary"
                                 onclick="changeParagraphMargin(-0.2)">-</button>
                             <span id="input-paragraph-margin" class="form-control text-center"></span>
-                            <button type="button" class="btn btn-outline-secondary" onclick="changeParagraphMargin(0.2)">+</button>
+                            <button type="button" class="btn btn-outline-secondary"
+                                onclick="changeParagraphMargin(0.2)">+</button>
                         </div>
                     </div>
                 </div>
@@ -187,7 +194,8 @@
             </div>
             <div class="row justify-content-between pt-3 border-top">
                 <div class="col-auto">
-                    <button class="btn btn-sm btn-outline-light rounded-pill px-3 prev-episode"><i class="bi bi-caret-left-fill"></i>
+                    <button class="btn btn-sm btn-outline-light rounded-pill px-3 prev-episode"><i
+                            class="bi bi-caret-left-fill"></i>
                         이전화</button>
                 </div>
                 <div class="col-auto text-end">
