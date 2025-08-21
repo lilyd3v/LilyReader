@@ -54,7 +54,7 @@
             font-family: 'RIDIBatang', sans-serif;
         }
 
-        #episode-content p {
+        #episode-content {
             text-indent: 1rem;
         }
 
@@ -354,11 +354,13 @@
             document.getElementById('input-line-height').innerText = lineHeight;
             document.getElementById('input-paragraph-margin').innerText = paragraphMargin;
 
-            document.getElementById('episode-content').querySelectorAll('p').forEach(p => {
-                p.style.fontSize = fontSize + 'rem';
-                p.style.lineHeight = lineHeight + 'rem';
-                p.style.marginTop = paragraphMargin + 'rem';
-                p.style.marginBottom = paragraphMargin + 'rem';
+            document.getElementById('episode-content').querySelectorAll('*').forEach(el => {
+                if (el.textContent.trim()) {
+                    el.style.fontSize = fontSize + 'rem';
+                    el.style.lineHeight = lineHeight + 'rem';
+                    el.style.marginTop = paragraphMargin + 'rem';
+                    el.style.marginBottom = paragraphMargin + 'rem';
+                }
             });
         }
 
@@ -368,8 +370,10 @@
             value = Number(value.toFixed(2));
             input.innerText = value;
             var content = document.getElementById('episode-content');
-            content.querySelectorAll('p').forEach(p => {
-                p.style.fontSize = value + 'rem';
+            content.querySelectorAll('*').forEach(el => {
+                if (el.textContent.trim()) {
+                    el.style.fontSize = value + 'rem';
+                }
             });
             localStorage.setItem('fontSize', value);
         }
@@ -380,8 +384,10 @@
             value = Number(value.toFixed(2));
             input.innerText = value;
             var content = document.getElementById('episode-content');
-            content.querySelectorAll('p').forEach(p => {
-                p.style.lineHeight = value + 'rem';
+            content.querySelectorAll('*').forEach(el => {
+                if (el.textContent.trim()) {
+                    el.style.lineHeight = value + 'rem';
+                }
             });
             localStorage.setItem('lineHeight', value);
         }
@@ -392,9 +398,11 @@
             value = Number(value.toFixed(2));
             input.innerText = value;
             var content = document.getElementById('episode-content');
-            content.querySelectorAll('p').forEach(p => {
-                p.style.marginTop = value + 'rem';
-                p.style.marginBottom = value + 'rem';
+            content.querySelectorAll('*').forEach(el => {
+                if (el.textContent.trim()) {
+                    el.style.marginTop = value + 'rem';
+                    el.style.marginBottom = value + 'rem';
+                }
             });
             localStorage.setItem('paragraphMargin', value);
         }
