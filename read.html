@@ -219,7 +219,7 @@
                 </div>
                 <div id="episode-content" class="overflow-x-hidden"></div>
                 <div id="manga-container"
-                    class="position-absolute start-0 end-0 top-0 bottom-0 overflow-hidden bg-secondary-subtle p-0 z-2 visually-hidden">
+                    class="position-absolute overflow-hidden bg-secondary-subtle p-0 z-2 visually-hidden">
                     <div id="manga-view" class="d-flex justify-content-center align-items-center h-100">
                         <img id="manga-image-1" /><img id="manga-image-2" />
                     </div>
@@ -491,7 +491,14 @@
         }
 
         function openMangaView() {
-            document.getElementById('manga-container').classList.remove('visually-hidden');
+            const mangaContainer = document.getElementById('manga-container');
+            mangaContainer.classList.remove('visually-hidden');
+            mangaContainer.addEventListener("touchmove", function (e) {
+                e.preventDefault();
+            }, { passive: false });
+            adjustMangaView();
+            window.addEventListener("resize", adjustMangaView);
+
             document.getElementById('episode-content').classList.add('visually-hidden');
             document.getElementById('comment-container').classList.add('visually-hidden');
 
@@ -558,6 +565,20 @@
             document.getElementById('episode-content').classList.remove('visually-hidden');
             document.getElementById('comment-container').classList.remove('visually-hidden');
             window.scrollTo(0, document.getElementById(`image-${currPage}`).offsetTop - 70);
+        }
+
+        function adjustMangaView() {
+            const mangaContainer = document.getElementById('manga-container');
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+            if (isMobile) {
+                mangaContainer.style.top = window.scrollY + "px";
+            } else {
+                mangaContainer.style.top = 0;
+            }
+            mangaContainer.style.left = 0;
+            mangaContainer.style.height = window.innerHeight + "px";
+            mangaContainer.style.width = window.innerWidth + "px";
         }
 
         function toggleMangaToolbar() {
@@ -663,9 +684,15 @@
         }
 
         function updateProgress() {
+            const viewMode = localStorage.getItem('mangaView') || 'double';
             const progress = document.getElementById('manga-progress');
             const totalPages = mangaImages.length - 1;
-            const percent = Math.round(((currPage + 1) / totalPages) * 100);
+            let percent;
+            if (viewMode === 'single') {
+                percent = Math.round((currPage / totalPages) * 100);
+            } else {
+                percent = Math.round(((currPage + 1) / totalPages) * 100);
+            }
 
             progress.setAttribute('aria-valuenow', currPage);
             progress.style.width = percent + "%";   // 👈 실제 막대 움직이는 부분
