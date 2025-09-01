@@ -514,9 +514,8 @@
             adjustMangaView();
             window.addEventListener("resize", adjustMangaView);
 
-            // document.getElementById('episode-content').classList.add('visually-hidden');
-            // document.getElementById('comment-container').classList.add('visually-hidden');
-            window.scrollTo({ top: 0, behavior: "instant" });
+            document.getElementById('episode-content').classList.add('opacity-0');
+            document.getElementById('comment-container').classList.add('opacity-0');
 
             const mangaView = localStorage.getItem('mangaView') || 'double';
             const mangaDirection = localStorage.getItem('mangaDirection') || 'ltr';
@@ -586,8 +585,8 @@
 
         function closeMangaView() {
             document.getElementById('manga-container').classList.add('visually-hidden');
-            document.getElementById('episode-content').classList.remove('visually-hidden');
-            document.getElementById('comment-container').classList.remove('visually-hidden');
+            document.getElementById('episode-content').classList.remove('opacity-0');
+            document.getElementById('comment-container').classList.remove('opacity-0');
             window.scrollTo({ top: document.getElementById(`image-${currPage}`).offsetTop - 70, behavior: "instant" });
         }
 
@@ -599,6 +598,7 @@
                 mangaContainer.style.top = window.scrollY + "px";
             } else {
                 mangaContainer.style.top = 0;
+                window.scrollTo({ top: 0, behavior: "instant" });
             }
             mangaContainer.style.left = 0;
             mangaContainer.style.height = window.innerHeight + "px";
