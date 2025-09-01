@@ -443,7 +443,7 @@
             document.getElementById('input-paragraph-margin').innerText = paragraphMargin;
 
             document.getElementById('episode-content').querySelectorAll('*').forEach(el => {
-                if (el.textContent.trim()) {
+                if (!el.closest('.og-div') && el.textContent.trim()) {
                     el.style.fontSize = fontSize + 'rem';
                     el.style.lineHeight = lineHeight + 'rem';
                     el.style.marginTop = paragraphMargin + 'rem';
@@ -459,7 +459,7 @@
             input.innerText = value;
             var content = document.getElementById('episode-content');
             content.querySelectorAll('*').forEach(el => {
-                if (el.textContent.trim()) {
+                if (!el.closest('.og-div') && el.textContent.trim()) {
                     el.style.fontSize = value + 'rem';
                 }
             });
@@ -473,7 +473,7 @@
             input.innerText = value;
             var content = document.getElementById('episode-content');
             content.querySelectorAll('*').forEach(el => {
-                if (el.textContent.trim()) {
+                if (!el.closest('.og-div') && el.textContent.trim()) {
                     el.style.lineHeight = value + 'rem';
                 }
             });
@@ -487,7 +487,7 @@
             input.innerText = value;
             var content = document.getElementById('episode-content');
             content.querySelectorAll('*').forEach(el => {
-                if (el.textContent.trim()) {
+                if (!el.closest('.og-div') && el.textContent.trim()) {
                     el.style.marginTop = value + 'rem';
                     el.style.marginBottom = value + 'rem';
                 }
