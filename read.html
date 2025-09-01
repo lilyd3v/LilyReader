@@ -296,6 +296,16 @@
         </div>
     </div>
 
+    <div class="toast-container position-fixed top-50 start-50 translate-middle  p-3">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="1000">
+            <div class="toast-header">
+                <i class="bi bi-book-fill me-2"></i>
+                <strong class="me-auto">LILY READER</strong>
+            </div>
+            <div class="toast-body"></div>
+        </div>
+    </div>
+
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('dev') && urlParams.get('dev') == "true") {
@@ -504,8 +514,9 @@
             adjustMangaView();
             window.addEventListener("resize", adjustMangaView);
 
-            document.getElementById('episode-content').classList.add('visually-hidden');
-            document.getElementById('comment-container').classList.add('visually-hidden');
+            // document.getElementById('episode-content').classList.add('visually-hidden');
+            // document.getElementById('comment-container').classList.add('visually-hidden');
+            window.scrollTo({ top: 0, behavior: "instant" });
 
             const mangaView = localStorage.getItem('mangaView') || 'double';
             const mangaDirection = localStorage.getItem('mangaDirection') || 'ltr';
@@ -538,8 +549,16 @@
                     mangaLeft();
                 } else if (event.key === 'ArrowRight') {
                     mangaRight();
+                } else if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+                    event.preventDefault();
+                } else if (event.key === 'Escape') {
+                    closeMangaView();
                 }
             });
+
+            mangaContainer.addEventListener('wheel', (event) => {
+                event.preventDefault();
+            }, { passive: false });
 
             var filteredEpisodes = series.episodes.filter(ep => ep.id > 0);
             const episodeIndex = filteredEpisodes.findIndex(ep => ep.id === episodeId);
@@ -569,7 +588,7 @@
             document.getElementById('manga-container').classList.add('visually-hidden');
             document.getElementById('episode-content').classList.remove('visually-hidden');
             document.getElementById('comment-container').classList.remove('visually-hidden');
-            window.scrollTo(0, document.getElementById(`image-${currPage}`).offsetTop - 70);
+            window.scrollTo({ top: document.getElementById(`image-${currPage}`).offsetTop - 70, behavior: "instant" });
         }
 
         function adjustMangaView() {
@@ -665,11 +684,23 @@
                 if (currPage > 0) {
                     currPage -= 2;
                     renderPage();
+                } else {
+                    const toast_div = document.getElementById('liveToast');
+                    const toastBody = document.querySelector('.toast-body');
+                    toastBody.textContent = "첫번째 페이지입니다";
+                    const toast = new bootstrap.Toast(toast_div);
+                    toast.show();
                 }
             } else {
                 if (currPage > 0) {
                     currPage--;
                     renderPage();
+                } else {
+                    const toast_div = document.getElementById('liveToast');
+                    const toastBody = document.querySelector('.toast-body');
+                    toastBody.textContent = "첫번째 페이지입니다";
+                    const toast = new bootstrap.Toast(toast_div);
+                    toast.show();
                 }
             }
         }
@@ -679,11 +710,23 @@
                 if (currPage < mangaImages.length - 2) {
                     currPage += 2;
                     renderPage();
+                } else {
+                    const toast_div = document.getElementById('liveToast');
+                    const toastBody = document.querySelector('.toast-body');
+                    toastBody.textContent = "마지막 페이지입니다";
+                    const toast = new bootstrap.Toast(toast_div);
+                    toast.show();
                 }
             } else {
                 if (currPage < mangaImages.length - 1) {
                     currPage++;
                     renderPage();
+                } else {
+                    const toast_div = document.getElementById('liveToast');
+                    const toastBody = document.querySelector('.toast-body');
+                    toastBody.textContent = "마지막 페이지입니다";
+                    const toast = new bootstrap.Toast(toast_div);
+                    toast.show();
                 }
             }
         }
