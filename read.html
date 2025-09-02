@@ -506,6 +506,7 @@
         }
 
         function openMangaView() {
+            document.querySelector('body').classList.add('overflow-hidden');
             const mangaContainer = document.getElementById('manga-container');
             mangaContainer.classList.remove('visually-hidden');
             mangaContainer.addEventListener("touchmove", function (e) {
@@ -584,6 +585,7 @@
         }
 
         function closeMangaView() {
+            document.querySelector('body').classList.remove('overflow-hidden');
             document.getElementById('manga-container').classList.add('visually-hidden');
             document.getElementById('episode-content').classList.remove('opacity-0');
             document.getElementById('comment-container').classList.remove('opacity-0');
