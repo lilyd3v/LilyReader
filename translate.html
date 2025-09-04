@@ -668,6 +668,7 @@
         }
         var viewerDiv = document.getElementById('viewer');
         var chunks = divideTextIntoChunks(viewerDiv);
+        console.log(chunks);
 
         document.getElementById("viewer").innerHTML = "";
         viewerDiv.appendChild(createSpinner('full'));
@@ -702,6 +703,12 @@ ${chunk.content}`
                 })
 
                 var json = await response.json();
+                console.log(json);
+                if (json.error) {
+                    alert(`번역 중 오류가 발생했습니다: ${json.error.message} (코드: ${json.error.code})`);
+                    document.getElementById(`spinner`).remove();
+                    return;
+                }
                 let translatedText = json.candidates[0].content.parts[0].text;
 
                 document.getElementById(`spinner`).remove();
