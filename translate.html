@@ -18,7 +18,9 @@
     <script src="https://cdn.jsdelivr.net/npm/epubjs/dist/epub.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 
-    <title>AI 자동 번역</title>
+    <link rel="icon" type="image/x-icon" href="./icons/favicon.ico">
+
+    <title>AI 자동 번역 | LilyReader</title>
     <style>
         body {
             font-family: "Chiron GoRound TC", sans-serif;
@@ -37,6 +39,11 @@
             transition: opacity 0.3s;
         }
 
+        #toolbar-top,
+        #toolbar-bottom {
+            touch-action: none;
+        }
+
         #toc {
             width: 300px;
             padding-top: 80px;
@@ -51,6 +58,7 @@
             font-weight: 400;
             font-style: normal;
             padding: 5rem 1rem;
+            touch-action: manipulation;
         }
 
         #viewer p {
@@ -63,6 +71,12 @@
             max-width: 100%;
             height: auto;
             margin: 1rem 0;
+        }
+
+        input,
+        textarea,
+        button {
+            touch-action: manipulation;
         }
     </style>
 </head>
