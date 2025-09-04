@@ -606,9 +606,10 @@
     }
 
     async function readPage(filename) {
-        page = pageList.findIndex(page => page.filename.includes(filename));
+        var newPage = Object.keys(zip.files).find(f => f.includes(filename));
+        console.log(newPage);
 
-        const text = await zip.file(pageList[page].filename).async("string");
+        const text = await zip.file(newPage).async("string");
         const parser = new DOMParser();
         const doc = parser.parseFromString(text, 'text/html');
 
