@@ -53,6 +53,10 @@
             padding: 5rem 1rem;
         }
 
+        #viewer p {
+            text-indent: 1rem;
+        }
+
         #viewer img,
         #viewer svg,
         #viewer image {
@@ -433,12 +437,12 @@
     function updateSetting() {
         const viewer = document.getElementById('viewer');
         document.querySelectorAll('#viewer p, #viewer div, #viewer span').forEach(el => {
-            el.style.fontSize = (setting.fontSize * 0.25 + 0.75) + 'rem';
-            el.style.lineHeight = (setting.lineHeight * 0.5 + 0.5) + 'rem';
-            el.style.marginBottom = (setting.paragraphSpacing * 0.5) + 'rem';
+            el.style.fontSize = getFontSize() + 'rem';
+            el.style.lineHeight = getLineHeight() + 'rem';
+            el.style.marginBottom = getParagraphSpacing() + 'rem';
         });
-        viewer.style.paddingLeft = ((5 - setting.paragraphWidth) * 5) + '%';
-        viewer.style.paddingRight = ((5 - setting.paragraphWidth) * 5) + '%';
+        viewer.style.paddingLeft = ((6 - setting.paragraphWidth) * 5) + '%';
+        viewer.style.paddingRight = ((6 - setting.paragraphWidth) * 5) + '%';
 
         if (setting.backgroundColor == '라이트') {
             document.body.setAttribute('data-bs-theme', 'light');
@@ -642,6 +646,12 @@
         document.getElementById("viewer").querySelectorAll("a").forEach(a => {
             a.href = `javascript:readPage('${a.href.split('/').pop().split('#')[0]}')`;
         });
+
+        document.querySelectorAll('#viewer p, #viewer div, #viewer span').forEach(el => {
+            el.style.fontSize = getFontSize() + 'rem';
+            el.style.lineHeight = getLineHeight() + 'rem';
+            el.style.marginBottom = getParagraphSpacing() + 'rem';
+        });
     }
 
     async function translatePage() {
@@ -694,9 +704,9 @@ ${chunk.content}`
 
                 for (let p of translatedText.split("\n")) {
                     if (p.trim()) {
-                        document.getElementById("viewer").innerHTML += `<p style="font-size: ${(setting.fontSize * 0.25 + 0.75)}rem; line-height: ${(setting.lineHeight * 0.5 + 0.5)}rem; margin-bottom: ${(setting.paragraphSpacing * 0.5)}rem;">${p}</p>`;
+                        document.getElementById("viewer").innerHTML += `<p style="font-size: ${getFontSize()}rem; line-height: ${getLineHeight()}rem; margin-bottom: ${getParagraphSpacing()}rem;">${p}</p>`;
                     } else {
-                        document.getElementById("viewer").innerHTML += `<p style="font-size: ${(setting.fontSize * 0.25 + 0.75)}rem; line-height: ${(setting.lineHeight * 0.5 + 0.5)}rem; margin-bottom: ${(setting.paragraphSpacing * 0.5)}rem;"><br /></p>`;
+                        document.getElementById("viewer").innerHTML += `<p style="font-size: ${getFontSize()}rem; line-height: ${getLineHeight()}rem; margin-bottom: ${getParagraphSpacing()}rem;"><br /></p>`;
                     }
                 }
 
@@ -765,6 +775,18 @@ ${chunk.content}`
         }
 
         return spinner;
+    }
+
+    function getFontSize() {
+        return setting.fontSize * 0.10 + 0.9;
+    }
+
+    function getLineHeight() {
+        return setting.lineHeight * 0.5 + 0.5;
+    }
+
+    function getParagraphSpacing() {
+        return setting.paragraphSpacing * 0.5;
     }
 
 </script>
