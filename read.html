@@ -359,33 +359,43 @@
                     }
 
                     if (document.getElementById('episode-content').innerHTML == "") {
-                        const content = await getContent(episodeId);
-                        document.querySelector('title').innerText = `${episode.title} | Lily Reader`;
-                        document.getElementById('episode-title').innerHTML = `${episode.title} <a href='${getURL(episodeId)}' target='_blank'><i class="bi bi-link-45deg"></i></a>`;
-                        document.getElementById('episode-content').innerHTML = content.content;
-                        document.getElementById('episode-writer').innerText = content.writer;
-                        document.getElementById('episode-date').innerText = new Date(episode.datetime).toLocaleString();
+                        try {
+                            const content = await getContent(episodeId);
+                            document.querySelector('title').innerText = `${episode.title} | Lily Reader`;
+                            document.getElementById('episode-title').innerHTML = `${episode.title} <a href='${getURL(episodeId)}' target='_blank'><i class="bi bi-link-45deg"></i></a>`;
+                            document.getElementById('episode-content').innerHTML = content.content;
+                            document.getElementById('episode-writer').innerText = content.writer;
+                            document.getElementById('episode-date').innerText = new Date(episode.datetime).toLocaleString();
 
-                        if (content.comments.length > 0) {
-                            document.getElementById('comment-container').innerHTML = `<span class='fw-bold my-2'>전체 댓글 ${content.comments.length}개</span>`;
-                        }
-                        content.comments.forEach(comment => {
-                            const commentDiv = document.createElement('div');
-                            if (comment.type === 'reply') {
-                                commentDiv.className = 'card my-2 ms-4 bg-secondary-subtle';
-                            } else {
-                                commentDiv.className = 'card my-2';
+                            if (content.comments.length > 0) {
+                                document.getElementById('comment-container').innerHTML = `<span class='fw-bold my-2'>전체 댓글 ${content.comments.length}개</span>`;
                             }
-                            commentDiv.innerHTML = `
-                            <div class="card-body">
-                                <span class="fw-bold">${comment.nickname}</span>
-                                <p id="comment-${comment.id}" class="card-text py-2"></p>
-                                <footer class="blockquote-footer mb-0">${comment.datetime}</footer>
-                            </div>
-                        `;
-                            document.getElementById('comment-container').appendChild(commentDiv);
-                            loadDcCon(comment.id, comment.comment);
-                        });
+                            content.comments.forEach(comment => {
+                                const commentDiv = document.createElement('div');
+                                if (comment.type === 'reply') {
+                                    commentDiv.className = 'card my-2 ms-4 bg-secondary-subtle';
+                                } else {
+                                    commentDiv.className = 'card my-2';
+                                }
+                                commentDiv.innerHTML = `
+                                <div class="card-body">
+                                    <span class="fw-bold">${comment.nickname}</span>
+                                    <p id="comment-${comment.id}" class="card-text py-2"></p>
+                                    <footer class="blockquote-footer mb-0">${comment.datetime}</footer>
+                                </div>`;
+                                document.getElementById('comment-container').appendChild(commentDiv);
+                                loadDcCon(comment.id, comment.comment);
+                            });
+
+                        } catch (error) {
+                            document.getElementById('content-container').innerHTML = `
+                            <div class="position-sticky top-0 start-0 text-center text-secondary h-100 w-100 py-5 my-5">
+                                <h1 class="fw-bold">ERROR 410</h1>
+                                <span>삭제된 에피소드입니다.</span>
+                            </div>`;
+                            hideSpinner();
+                            return;
+                        }
                     }
 
 
