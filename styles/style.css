@@ -50,6 +50,18 @@ input + .btn-outline-body:hover {
     text-indent: 0;
 }
 
+.og-wrap {
+    text-indent: 0;
+}
+
+.og-img img {
+    width: 100% !important;
+    height: 100%;
+    margin-left: 0 !important;
+    object-fit: cover;
+    display: block;
+}
+
 @media (max-width: 768px) {
     #episode-content img {
         width: calc(100% + 2rem);

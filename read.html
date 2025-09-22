@@ -108,7 +108,7 @@
                 </div>
                 <div id="episode-content" class="overflow-x-hidden"></div>
                 <div id="manga-container"
-                    class="position-absolute overflow-hidden bg-secondary-subtle p-0 z-2 visually-hidden">
+                    class="position-absolute overflow-hidden bg-body p-0 z-2 visually-hidden">
                     <div id="manga-view" class="d-flex justify-content-center align-items-center h-100">
                         <img id="manga-image-1" /><img id="manga-image-2" />
                     </div>
@@ -342,7 +342,7 @@
             document.getElementById('input-paragraph-margin').innerText = paragraphMargin;
 
             document.getElementById('episode-content').querySelectorAll('*').forEach(el => {
-                if (!el.closest('.og-div') && el.textContent.trim()) {
+                if (!el.closest('.og-wrap') && el.textContent.trim()) {
                     el.style.fontSize = fontSize + 'rem';
                     el.style.lineHeight = lineHeight + 'rem';
                     el.style.marginTop = paragraphMargin + 'rem';
@@ -358,7 +358,7 @@
             input.innerText = value;
             var content = document.getElementById('episode-content');
             content.querySelectorAll('*').forEach(el => {
-                if (!el.closest('.og-div') && el.textContent.trim()) {
+                if (!el.closest('.og-wrap') && el.textContent.trim()) {
                     el.style.fontSize = value + 'rem';
                 }
             });
@@ -372,7 +372,7 @@
             input.innerText = value;
             var content = document.getElementById('episode-content');
             content.querySelectorAll('*').forEach(el => {
-                if (!el.closest('.og-div') && el.textContent.trim()) {
+                if (!el.closest('.og-wrap') && el.textContent.trim()) {
                     el.style.lineHeight = value + 'rem';
                 }
             });
@@ -386,7 +386,7 @@
             input.innerText = value;
             var content = document.getElementById('episode-content');
             content.querySelectorAll('*').forEach(el => {
-                if (!el.closest('.og-div') && el.textContent.trim()) {
+                if (!el.closest('.og-wrap') && el.textContent.trim()) {
                     el.style.marginTop = value + 'rem';
                     el.style.marginBottom = value + 'rem';
                 }
