@@ -335,7 +335,11 @@
         function setParagraphStyle() {
             const fontSize = localStorage.getItem('fontSize') || '1';
             const lineHeight = localStorage.getItem('lineHeight') || '2';
-            const paragraphMargin = localStorage.getItem('paragraphMargin') || '1';
+            const paragraphMargin =  localStorage.getItem('paragraphMargin') || '1';
+
+            if (isNaN(fontSize)) fontSize = '1';
+            if (isNaN(lineHeight)) lineHeight = '2';
+            if (isNaN(paragraphMargin)) paragraphMargin = '1';
 
             document.getElementById('input-font-size').innerText = fontSize;
             document.getElementById('input-line-height').innerText = lineHeight;
