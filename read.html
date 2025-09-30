@@ -107,8 +107,7 @@
                     </div>
                 </div>
                 <div id="episode-content" class="overflow-x-hidden"></div>
-                <div id="manga-container"
-                    class="position-absolute overflow-hidden bg-body p-0 z-2 visually-hidden">
+                <div id="manga-container" class="position-absolute overflow-hidden bg-body p-0 z-2 visually-hidden">
                     <div id="manga-view" class="d-flex justify-content-center align-items-center h-100">
                         <img id="manga-image-1" /><img id="manga-image-2" />
                     </div>
@@ -333,13 +332,13 @@
         }
 
         function setParagraphStyle() {
-            const fontSize = localStorage.getItem('fontSize') || '1';
-            const lineHeight = localStorage.getItem('lineHeight') || '2';
-            const paragraphMargin =  localStorage.getItem('paragraphMargin') || '1';
+            let fontSize = localStorage.getItem('fontSize') || '1';
+            let lineHeight = localStorage.getItem('lineHeight') || '2';
+            let paragraphMargin = localStorage.getItem('paragraphMargin') || '1';
 
-            if (isNaN(fontSize)) fontSize = '1';
-            if (isNaN(lineHeight)) lineHeight = '2';
-            if (isNaN(paragraphMargin)) paragraphMargin = '1';
+            if (Number.isNaN(Number(fontSize))) fontSize = '1';
+            if (Number.isNaN(Number(lineHeight))) lineHeight = '2';
+            if (Number.isNaN(Number(paragraphMargin))) paragraphMargin = '1';
 
             document.getElementById('input-font-size').innerText = fontSize;
             document.getElementById('input-line-height').innerText = lineHeight;
