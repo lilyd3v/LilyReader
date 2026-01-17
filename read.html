@@ -235,6 +235,7 @@
 
             if (data) {
                 series = convertSeries(data);
+                document.querySelector('meta[property="og:description"]').setAttribute('content', `${series.title}`);
 
                 var filteredEpisodes = series.episodes.filter(ep => ep.id > 0);
 
@@ -355,6 +356,38 @@
             }
 
             hideSpinner();
+
+
+            document.addEventListener('keydown', (event) => {
+                if (document.getElementById('manga-container').classList.contains('visually-hidden')) {
+                    const filteredEpisodes = series.episodes.filter(ep => ep.id > 0);
+                    const episodeIndex = filteredEpisodes.findIndex(ep => ep.id === episodeId);
+
+                    if (event.key === 'ArrowLeft') {
+                        if (episodeIndex > 0) {
+                            const prevEpisode = filteredEpisodes[episodeIndex - 1];
+                            window.location.href = `read.html?series=${seriesId}&episode=${prevEpisode.id}`;
+                        } else {
+                            const toast_div = document.getElementById('liveToast');
+                            const toastBody = document.querySelector('.toast-body');
+                            toastBody.textContent = "첫번째 에피소드입니다";
+                            const toast = new bootstrap.Toast(toast_div);
+                            toast.show();
+                        }
+                    } else if (event.key === 'ArrowRight') {
+                        if (episodeIndex < filteredEpisodes.length - 1) {
+                            const nextEpisode = filteredEpisodes[episodeIndex + 1];
+                            window.location.href = `read.html?series=${seriesId}&episode=${nextEpisode.id}`;
+                        } else {
+                            const toast_div = document.getElementById('liveToast');
+                            const toastBody = document.querySelector('.toast-body');
+                            toastBody.textContent = "마지막 에피소드입니다";
+                            const toast = new bootstrap.Toast(toast_div);
+                            toast.show();
+                        }
+                    }
+                }
+            });
         }
 
         function setParagraphStyle() {
