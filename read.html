@@ -632,53 +632,101 @@
         }
 
         function prevPage(view = "double") {
+            const filteredEpisodes = series.episodes.filter(ep => ep.id > 0);
+            const episodeIndex = filteredEpisodes.findIndex(ep => ep.id === episodeId);
+
             if (view == "double") {
                 if (currPage > 0) {
                     currPage -= 2;
                     renderPage();
                 } else {
-                    const toast_div = document.getElementById('liveToast');
-                    const toastBody = document.querySelector('.toast-body');
-                    toastBody.textContent = "첫번째 페이지입니다";
-                    const toast = new bootstrap.Toast(toast_div);
-                    toast.show();
+                    if (episodeIndex > 0) {
+                        const prevEpisode = filteredEpisodes[episodeIndex - 1];
+                        window.location.href = `read.html?series=${seriesId}&episode=${prevEpisode.id}&view=manga`;
+                    } else {
+                        const toast_div = document.getElementById('liveToast');
+                        const toastBody = document.querySelector('.toast-body');
+                        toastBody.textContent = "첫번째 에피소드입니다";
+                        const toast = new bootstrap.Toast(toast_div);
+                        toast.show();
+                    }
+                    // const toast_div = document.getElementById('liveToast');
+                    // const toastBody = document.querySelector('.toast-body');
+                    // toastBody.textContent = "첫번째 페이지입니다";
+                    // const toast = new bootstrap.Toast(toast_div);
+                    // toast.show();
                 }
             } else {
                 if (currPage > 0) {
                     currPage--;
                     renderPage();
                 } else {
-                    const toast_div = document.getElementById('liveToast');
-                    const toastBody = document.querySelector('.toast-body');
-                    toastBody.textContent = "첫번째 페이지입니다";
-                    const toast = new bootstrap.Toast(toast_div);
-                    toast.show();
+                    if (episodeIndex > 0) {
+                        const prevEpisode = filteredEpisodes[episodeIndex - 1];
+                        window.location.href = `read.html?series=${seriesId}&episode=${prevEpisode.id}&view=manga`;
+                    } else {
+                        const toast_div = document.getElementById('liveToast');
+                        const toastBody = document.querySelector('.toast-body');
+                        toastBody.textContent = "첫번째 에피소드입니다";
+                        const toast = new bootstrap.Toast(toast_div);
+                        toast.show();
+                    }
+                    // const toast_div = document.getElementById('liveToast');
+                    // const toastBody = document.querySelector('.toast-body');
+                    // toastBody.textContent = "첫번째 페이지입니다";
+                    // const toast = new bootstrap.Toast(toast_div);
+                    // toast.show();
                 }
             }
         }
 
         function nextPage(view = "double") {
+            const filteredEpisodes = series.episodes.filter(ep => ep.id > 0);
+            const episodeIndex = filteredEpisodes.findIndex(ep => ep.id === episodeId);
+
             if (view == "double") {
                 if (currPage < mangaImages.length - 2) {
                     currPage += 2;
                     renderPage();
                 } else {
-                    const toast_div = document.getElementById('liveToast');
-                    const toastBody = document.querySelector('.toast-body');
-                    toastBody.textContent = "마지막 페이지입니다";
-                    const toast = new bootstrap.Toast(toast_div);
-                    toast.show();
+                    if (episodeIndex < filteredEpisodes.length - 1) {
+                        const nextEpisode = filteredEpisodes[episodeIndex + 1];
+                        window.location.href = `read.html?series=${seriesId}&episode=${nextEpisode.id}&view=manga`;
+                    } else {
+                        const toast_div = document.getElementById('liveToast');
+                        const toastBody = document.querySelector('.toast-body');
+                        toastBody.textContent = "마지막 에피소드입니다";
+                        const toast = new bootstrap.Toast(toast_div);
+                        toast.show();
+                    }
+
+                    // const toast_div = document.getElementById('liveToast');
+                    // const toastBody = document.querySelector('.toast-body');
+                    // toastBody.textContent = "마지막 페이지입니다";
+                    // const toast = new bootstrap.Toast(toast_div);
+                    // toast.show();
                 }
             } else {
                 if (currPage < mangaImages.length - 1) {
                     currPage++;
                     renderPage();
                 } else {
-                    const toast_div = document.getElementById('liveToast');
-                    const toastBody = document.querySelector('.toast-body');
-                    toastBody.textContent = "마지막 페이지입니다";
-                    const toast = new bootstrap.Toast(toast_div);
-                    toast.show();
+                    if (episodeIndex < filteredEpisodes.length - 1) {
+                        const nextEpisode = filteredEpisodes[episodeIndex + 1];
+                        window.location.href = `read.html?series=${seriesId}&episode=${nextEpisode.id}&view=manga`;
+                    } else {
+                        const toast_div = document.getElementById('liveToast');
+                        const toastBody = document.querySelector('.toast-body');
+                        toastBody.textContent = "마지막 에피소드입니다";
+                        const toast = new bootstrap.Toast(toast_div);
+                        toast.show();
+                    }
+
+                    // const toast_div = document.getElementById('liveToast');
+                    // const toastBody = document.querySelector('.toast-body');
+                    // toastBody.textContent = "마지막 페이지입니다";
+                    // const toast = new bootstrap.Toast(toast_div);
+                    // toast.show();
                 }
             }
         }
